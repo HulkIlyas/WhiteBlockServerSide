@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"
+        integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 style="color: limegreen;">hey there and welecome</h1>
+    <h2>this is a simple app to understand socket.io and socket.io-client</h2>
+    <p style="font-size: 20px;line-height: 22px;">
+        This is a server side for the XYcoordinate app (link : <a target="_blank"
+            href="https://github.com/HulkIlyas/PlayingWithSocket.io">see the app</a> ) that use socket client for moving
+        a
+        white block in the application , you
+        control the white block from this page using arrows (up down right left keys).
+        with that you can build a great app (e.g: chats applications....and so on)
+
+
+    </p>
+</body>
+<script>
+    var x = 0
+    var y = 0
+    $(document).ready(() => {
+        var socket = io.connect();
+        var vitesse = 5;
+        $(document).on("keydown", (e) => {
+            if (e.which == 37) {
+                x -= vitesse;
+            }
+            else if (e.which == 38) {
+                y += vitesse
+            }
+            else if (e.which == 39) {
+                x += vitesse
+            }
+            else if (e.which == 40) {
+                y -= vitesse
+            }
+            else {
+                return;
+            }
+            socket.emit("move", {
+                x, y
+
+            });
+        })
+
+
+    })
+</script>
+
+</html>
